@@ -1,6 +1,7 @@
 package com.nexus.game_trade.controller;
 
-import com.nexus.game_trade.dto.DtoUser;
+import com.nexus.game_trade.dto.UserRequestDTO;
+import com.nexus.game_trade.dto.UserResponseDTO;
 import com.nexus.game_trade.model.entities.User;
 import com.nexus.game_trade.service.ServiceUsers;
 import org.springframework.http.HttpStatus;
@@ -20,19 +21,19 @@ public class UserController {
         }
 
         @PostMapping
-        public ResponseEntity<DtoUser.UserResponseDTO> saveUser(@RequestBody DtoUser.UserRequestDTO dto) {
+        public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserRequestDTO dto) {
             return ResponseEntity.status(HttpStatus.CREATED).body(serviceUsers.saveUser(dto));
         }
 
         @GetMapping("/{nickname}")
-        public ResponseEntity<DtoUser.UserResponseDTO> findByNickname(@PathVariable String nickname) {
+        public ResponseEntity<UserResponseDTO> findByNickname(@PathVariable String nickname) {
             return ResponseEntity.ok(serviceUsers.findByNickname(nickname));
         }
 
         @PutMapping("/{nickname}")
-        public ResponseEntity<DtoUser.UserResponseDTO> updateUser(
+        public ResponseEntity<UserResponseDTO> updateUser(
                 @PathVariable String nickname,
-                @RequestBody DtoUser.UserRequestDTO dto) {
+                @RequestBody UserRequestDTO dto) {
             return ResponseEntity.ok(serviceUsers.updateUser(nickname, dto));
         }
 

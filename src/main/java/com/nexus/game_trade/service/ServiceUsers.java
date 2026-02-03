@@ -1,6 +1,7 @@
 package com.nexus.game_trade.service;
 
-import com.nexus.game_trade.dto.DtoUser;
+import com.nexus.game_trade.dto.UserRequestDTO;
+import com.nexus.game_trade.dto.UserResponseDTO;
 import com.nexus.game_trade.model.entities.User;
 import com.nexus.game_trade.repository.RepositoryUser;
 import org.springframework.stereotype.Service;
@@ -16,32 +17,32 @@ public class ServiceUsers {
         this.repository = repository;
     }
 
-    public DtoUser.UserResponseDTO saveUser(DtoUser.UserRequestDTO dto) {
+    public UserResponseDTO saveUser(UserRequestDTO dto) {
         User user = new User();
-        user.setNickname(dto.nickname());
-        user.setEmail(dto.email());
-        user.setPassword(dto.password()); // Risco: Requer Hashing
+        user.setNickname(dto.getNickname());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword()); // Risco: Requer Hashing
         user.setRegistrationDate(LocalDate.now());
-        user.setLevel(dto.level());
+        user.setLevel(dto.getLevel());
 
         User saved = repository.save(user);
         return toResponseDTO(saved);
     }
 
-    public DtoUser.UserResponseDTO findByNickname(String nickname) {
+    public UserResponseDTO findByNickname(String nickname) {
         User user = repository.findByNickname(nickname)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         return toResponseDTO(user);
     }
 
-    public DtoUser.UserResponseDTO updateUser(String nickname, DtoUser.UserRequestDTO dto) {
+    public UserResponseDTO updateUser(String nickname, UserRequestDTO dto) {
         User user = repository.findByNickname(nickname)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        user.setEmail(dto.email());
-        user.setPassword(dto.password());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
         // Nickname geralmente é imutável em sistemas de trade, mas se for alterar:
-        user.setNickname(dto.nickname());
+        user.setNickname(dto.getNickname());
 
         return toResponseDTO(repository.save(user));
     }
@@ -52,9 +53,8 @@ public class ServiceUsers {
         repository.delete(user);
     }
 
-    // Mapper Simples (Poderia usar MapStruct em projetos maiores)
-    private DtoUser.UserResponseDTO toResponseDTO(User user) {
-        return new DtoUser.UserResponseDTO(
+    private UserResponseDTO toResponseDTO(User user) {
+        return new UserResponseDTO(
                 user.getId(), user.getNickname(), user.getEmail(),
                 user.getAvgReputation(), user.getTotalExchanges(), user.getLevel()
         );
