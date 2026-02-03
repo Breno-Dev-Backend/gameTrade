@@ -17,4 +17,14 @@ public class UserResponseDTO {
            private Integer totalExchanges;
            private EnumUsers level;
 
+
+    public UserResponseDTO(UUID id, String nickname, String email, Double avgReputation, Integer totalExchanges, EnumUsers level) {
+        this.id = id;
+        this.nickname = nickname;
+        this.email = email;
+        this.avgReputation = avgReputation;
+        this.totalExchanges = totalExchanges;
+        this.level = level;
+    }
 }
+
