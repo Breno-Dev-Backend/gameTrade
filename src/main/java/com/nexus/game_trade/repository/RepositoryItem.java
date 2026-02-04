@@ -10,6 +10,6 @@ import java.util.UUID;
 
 public interface RepositoryItem extends JpaRepository<Item, UUID> {
 
-    Optional<Item> findByJogo(EnumGame game);
-    Optional<Item> findByRarity(EnumRarityItem rarity);
+    Item findByJogo(EnumGame game);
+    Item findByRarity(EnumRarityItem rarity);
 }

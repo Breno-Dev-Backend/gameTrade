@@ -24,12 +24,15 @@ public class ItemResponseDTO {
     private EnumStatusItem status;
     private LocalDate registrationDate;
 
-    private UserSummaryDTO owner;
-
-    @Data
-    public static class UserSummaryDTO {
-        private UUID id;
-        private String username;
-        private String avatarUrl;
+    public ItemResponseDTO(UUID id, String name, String description, EnumGame game, EnumRarityItem rarity, BigDecimal price, String imageUrl, EnumStatusItem status, LocalDate registrationDate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.game = game;
+        this.rarity = rarity;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.status = status;
+        this.registrationDate = registrationDate;
     }
 }

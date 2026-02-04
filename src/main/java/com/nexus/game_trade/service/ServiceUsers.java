@@ -41,7 +41,6 @@ public class ServiceUsers {
 
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
-        // Nickname geralmente é imutável em sistemas de trade, mas se for alterar:
         user.setNickname(dto.getNickname());
 
         return toResponseDTO(repository.save(user));
