@@ -1,6 +1,7 @@
 package com.nexus.game_trade.dto;
 
 import com.nexus.game_trade.model.entities.EnumUsers;
+import com.nexus.game_trade.model.entities.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -28,7 +29,16 @@ public class UserRequestDTO {
         @NotBlank(message = "level is required")
         private EnumUsers level;
 
+        public UserRequestDTO() {
 
+        }
+
+    public UserRequestDTO(String nickname, String email, String password, EnumUsers level) {
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.level = level;
     }
+}
 
 

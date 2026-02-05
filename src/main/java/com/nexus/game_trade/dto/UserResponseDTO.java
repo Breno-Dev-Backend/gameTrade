@@ -18,6 +18,11 @@ public class UserResponseDTO {
            private EnumUsers level;
 
 
+    public UserResponseDTO() {
+
+    }
+
+
     public UserResponseDTO(UUID id, String nickname, String email, Double avgReputation, Integer totalExchanges, EnumUsers level) {
         this.id = id;
         this.nickname = nickname;

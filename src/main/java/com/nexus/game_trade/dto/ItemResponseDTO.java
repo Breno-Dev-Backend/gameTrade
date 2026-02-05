@@ -1,3 +1,4 @@
+// ItemResponseDTO.java
 package com.nexus.game_trade.dto;
 
 import com.nexus.game_trade.model.entities.EnumGame;
@@ -10,10 +11,12 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
+@Setter
 @Builder
-@ToString
-@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemResponseDTO {
+
     private UUID id;
     private String name;
     private String description;
@@ -24,15 +27,8 @@ public class ItemResponseDTO {
     private EnumStatusItem status;
     private LocalDate registrationDate;
 
-    public ItemResponseDTO(UUID id, String name, String description, EnumGame game, EnumRarityItem rarity, BigDecimal price, String imageUrl, EnumStatusItem status, LocalDate registrationDate) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.game = game;
-        this.rarity = rarity;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.status = status;
-        this.registrationDate = registrationDate;
-    }
+
+    private UUID sellerId;
+    private String sellerName;
+    private String sellerEmail;
 }

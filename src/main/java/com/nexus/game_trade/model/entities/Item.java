@@ -2,6 +2,7 @@ package com.nexus.game_trade.model.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_itens")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -39,7 +41,11 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private EnumStatusItem status;
 
-    private User userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id", nullable = false)
+    private User seller;
+
     private LocalDate registrationDate;
 
 }

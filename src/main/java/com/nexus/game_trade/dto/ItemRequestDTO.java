@@ -1,26 +1,25 @@
+// ItemRequestDTO.java
 package com.nexus.game_trade.dto;
 
 import com.nexus.game_trade.model.entities.EnumGame;
 import com.nexus.game_trade.model.entities.EnumRarityItem;
 import com.nexus.game_trade.model.entities.EnumStatusItem;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import jakarta.validation.constraints.*;
+import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
-
+import java.util.UUID;
 
 @Getter
+@Setter
 @Builder
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemRequestDTO {
+
     @NotBlank(message = "Nome é obrigatório")
     @Size(min = 3, max = 100, message = "Nome deve ter 3-100 caracteres")
     private String name;
@@ -31,8 +30,10 @@ public class ItemRequestDTO {
     @NotNull(message = "Jogo é obrigatório")
     private EnumGame game;
 
+    @NotNull(message = "Raridade é obrigatória")
     private EnumRarityItem rarity;
 
+    @NotNull(message = "Preço é obrigatório")
     @PositiveOrZero(message = "Preço não pode ser negativo")
     private BigDecimal price;
 
@@ -42,5 +43,8 @@ public class ItemRequestDTO {
     @NotNull(message = "Status é obrigatório")
     private EnumStatusItem status;
 
-    // NOTA: userId NÃO vai aqui! Vem do token/autenticação
+    @NotNull(message = "Seller ID é obrigatório")
+    private UUID sellerId;
+
+
 }
