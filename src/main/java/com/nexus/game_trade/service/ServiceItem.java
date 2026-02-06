@@ -3,6 +3,7 @@ package com.nexus.game_trade.service;
 
 import com.nexus.game_trade.dto.ItemRequestDTO;
 import com.nexus.game_trade.dto.ItemResponseDTO;
+import com.nexus.game_trade.exception.NotFoundException;
 import com.nexus.game_trade.model.entities.EnumGame;
 import com.nexus.game_trade.model.entities.EnumRarityItem;
 import com.nexus.game_trade.model.entities.EnumStatusItem;
@@ -26,12 +27,12 @@ import java.util.stream.Collectors;
 public class ServiceItem {
 
     private final RepositoryItem itemRepository;
-    private final RepositoryUser userRepository; // Adicione esta dependência
+    private final RepositoryUser userRepository;
 
-    // CREATE
+
     public ItemResponseDTO saveItem(ItemRequestDTO dto) {
         User seller = userRepository.findById(dto.getSellerId())
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new NotFoundException(
                         "User not found with id: " + dto.getSellerId()
                 ));
 
@@ -65,7 +66,7 @@ public class ServiceItem {
     @Transactional(readOnly = true)
     public ItemResponseDTO findById(UUID id) {
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Item not found with id: " + id));
         return toResponseDTO(item);
     }
 
@@ -89,7 +90,7 @@ public class ServiceItem {
     public ItemResponseDTO updateItem(UUID id, ItemRequestDTO dto) {
 
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Item not found with id: " + id));
 
 
         if (dto.getSellerId() != null && !dto.getSellerId().equals(item.getSeller().getId())) {
@@ -117,7 +118,7 @@ public class ServiceItem {
 
     public void deleteItem(UUID id) {
         if (!itemRepository.existsById(id)) {
-            throw new EntityNotFoundException("Item not found with id: " + id);
+            throw new NotFoundException("Item not found with id: " + id);
         }
         itemRepository.deleteById(id);
     }
