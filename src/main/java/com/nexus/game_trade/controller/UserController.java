@@ -4,6 +4,7 @@ import com.nexus.game_trade.dto.UserRequestDTO;
 import com.nexus.game_trade.dto.UserResponseDTO;
 import com.nexus.game_trade.model.entities.User;
 import com.nexus.game_trade.service.ServiceUsers;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "Users", description = "Gerenciamento de usuários para troca")
 public class UserController {
 
         private final ServiceUsers serviceUsers;

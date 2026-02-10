@@ -6,6 +6,7 @@ import com.nexus.game_trade.dto.ItemResponseDTO;
 import com.nexus.game_trade.model.entities.EnumGame;
 import com.nexus.game_trade.model.entities.EnumRarityItem;
 import com.nexus.game_trade.service.ServiceItem;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor
+@Tag(name = "Items", description = "Gerenciamento de itens para troca")
 public class ItemController {
 
     private final ServiceItem serviceItem;
